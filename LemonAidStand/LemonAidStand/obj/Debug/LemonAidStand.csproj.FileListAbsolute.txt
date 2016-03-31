@@ -1,0 +1,6 @@
+c:\users\erick\onedrive\documents\visual studio 2015\Projects\LemonAidStand\LemonAidStand\bin\Debug\LemonAidStand.exe.config
+C:\Users\erick\OneDrive\Documents\Visual Studio 2015\Projects\LemonAidStand\LemonAidStand\bin\Debug\LemonAidStand.exe
+C:\Users\erick\OneDrive\Documents\Visual Studio 2015\Projects\LemonAidStand\LemonAidStand\bin\Debug\LemonAidStand.pdb
+C:\Users\erick\OneDrive\Documents\Visual Studio 2015\Projects\LemonAidStand\LemonAidStand\obj\Debug\LemonAidStand.exe
+C:\Users\erick\OneDrive\Documents\Visual Studio 2015\Projects\LemonAidStand\LemonAidStand\obj\Debug\LemonAidStand.pdb
+C:\Users\erick\OneDrive\Documents\Visual Studio 2015\Projects\LemonAidStand\LemonAidStand\obj\Debug\LemonAidStand.csprojResolveAssemblyReference.cache
