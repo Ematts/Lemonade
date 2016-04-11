@@ -11,10 +11,16 @@ namespace LemonAidStand
         static void Main(string[] args)
 
         {
+
             Game game = new Game();
-            game.getCustomers();
-            List<Customer> customerList = new List<Customer>();
-            Console.ReadKey();
+            game.startGame(game);
+
+
+
+           Console.ReadKey();
+
+
+
         }
     }
 }

@@ -2,36 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace LemonAidStand
 {
     class Weather
     {
-        double temp;
-        double condition;
-        string weatherCondition;
-        double sunnyAddition = 1.5;
-        double cloudyNeutral = 1;
-        double rainySubtraction = 0.5;
-        Random rndTemp = new Random();
-        Random rndCondition = new Random();
-    
+        public int temperature;
+        public int condition;
+        public string weatherCondition;
+        public double sunnyAddition = 1.5;
+        public double cloudyNeutral = 1;
+        public double rainySubtraction = 0.5;
+        public double weatherDemand; //do I want this here??
+        
+        
+
         public Weather()
         {
 
-            
-            
+
+
 
         }
 
         public string getWeatherCondition()
 
         {
-            condition = rndCondition.Next(1, 10);
+            Random rndCondition = new Random();
+            condition = rndCondition.Next(1, 4);
+           
 
 
-            if (condition <= 3)
+            if (condition == 1)
 
             {
 
@@ -39,7 +44,7 @@ namespace LemonAidStand
 
             }
 
-            else if (condition <= 6 && condition > 3)
+            else if (condition == 2)
 
             {
 
@@ -55,32 +60,33 @@ namespace LemonAidStand
 
             }
 
+            Thread.Sleep(123);
             return weatherCondition;
 
         }
 
-        public double getTemp()
+        public double getTemperature()
 
-               {
+        {
+            Random rndTemp = new Random();
+            temperature = rndTemp.Next(60, 100);
+            return temperature;
 
-                temp = rndTemp.Next(60, 100);
-                return temp;
+        }
 
-               }
+        public double getWeatherDemand()
 
-       public double getWeatherDemand()
-
-            {
-
+        {
+            getWeatherCondition();
+            getTemperature();
 
 
             if (weatherCondition == "Sunny")
 
 
             {
-
-                double weatherDemand = sunnyAddition * temp;
-
+                Console.WriteLine("Today's weather is " + temperature + " degrees and " + weatherCondition + ".");
+                weatherDemand = sunnyAddition * temperature;
                 return weatherDemand;
 
             }
@@ -89,8 +95,8 @@ namespace LemonAidStand
             else if (weatherCondition == "Cloudy")
 
             {
-
-                double weatherDemand = cloudyNeutral * temp;
+                Console.WriteLine("Today's weather is " + temperature + " degrees and " + weatherCondition + ".");
+                weatherDemand = cloudyNeutral * temperature;
                 return weatherDemand;
 
 
@@ -99,7 +105,8 @@ namespace LemonAidStand
             else
 
             {
-                double weatherDemand = rainySubtraction * temp;
+                Console.WriteLine("Today's weather is " + temperature + " degrees and " + weatherCondition + ".");
+                weatherDemand = rainySubtraction * temperature;
                 return weatherDemand;
 
             }

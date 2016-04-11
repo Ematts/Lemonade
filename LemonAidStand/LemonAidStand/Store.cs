@@ -9,95 +9,169 @@ namespace LemonAidStand
     class Store
     {
         public double lemonPrice = 0.10;
-        public double lemonPurchase;
-        public double icePrice = 0.05;
-        public double icePurchase;
-        public double sugarPrice = 0.18;
-        public double sugarPurchase;
-        public double cupPrice = 0.04;
-        public double cupPurchase;
+        public double sugarPrice = 0.05;
+        public double icePrice = 0.07;
+        public double cupPrice = 0.06;
 
-        Player player = new Player();
 
-        public void storeFront()
-        {
-            Console.WriteLine("Please place your supplie order.");
-            Console.WriteLine("Money: " + player.money + " Lemons: " + player.lemonCount + "Icecubes: " + player.iceCount + "Cups of sugar: " + player.sugarCount + "Cups: " + player.cupCount);
-        }
         public Store()
         {
 
 
         }
-
-        public double getLemons()
+        public void storeFront(Player player, Game game)
         {
-            Console.WriteLine("How many lemons do you want?");
-            lemonPurchase = double.Parse(Console.ReadLine());
+            Console.WriteLine("Please place your supply order.");
+            Console.WriteLine("You currently have $" + player.money + ", " + player.lemonCount + " lemons, " + player.sugarCount + " servings of sugar, " + player.iceCount + " servings of ice, and " + player.cupCount + " cups.");
+            Console.WriteLine("Press 1 to buy lemons, 2 to buy sugar, 3 to buy ice, 4 to buy cups, or 5 to return to the main menu.");
+            int storeChoice = int.Parse(Console.ReadLine());
 
+            if (storeChoice == 1)
+            {
+                getLemons(player, game);
 
-            return lemonPurchase;
+            }
+
+            else if (storeChoice == 2)
+
+            {
+                getSugar(player, game);
+            }
+
+            else if (storeChoice == 3)
+
+            {
+                getIce(player, game);
+            }
+
+            else if (storeChoice == 4)
+
+            {
+                getCups(player, game);
+            }
+
+            else if (storeChoice == 5)
+
+            {
+                game.mainMenu(player, game);
+            }
+
+            else
+
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                storeFront(player, game);
+            }
 
         }
-
-        public double getIce()
+        public double getLemons(Player player, Game game)
         {
-            Console.WriteLine("How much ice do you want?");
-            icePurchase = double.Parse(Console.ReadLine());
 
+            Console.WriteLine("Lemons cost .10 a piece.  How many lemons do you want?");
+            int lemonsInCart = int.Parse(Console.ReadLine());
 
-            return icePurchase;
+            lemonCalc(player, lemonsInCart, game);
+            return lemonsInCart;
+           
+        }
+
+        public double getIce(Player player, Game game)
+        {
+            Console.WriteLine("Ice costs .07 a serving.  How much ice do you want?");
+            double iceInCart = double.Parse(Console.ReadLine());
+
+            iceCalc(player, iceInCart, game);
+            return iceInCart;
 
         }
-        public double getSugar()
+        public double getSugar(Player player, Game game)
         {
-            Console.WriteLine("How much sugar do you want?");
-            sugarPurchase = double.Parse(Console.ReadLine());
+            Console.WriteLine("Sugar costs .05 a serving.  How much sugar do you want?");
+            double sugarInCart = double.Parse(Console.ReadLine());
 
-
-            return sugarPurchase;
+            sugarCalc(player, sugarInCart, game);
+            return sugarInCart;
 
         }
-        public double getCups()
+        public double getCups(Player player, Game game)
         {
             Console.WriteLine("How many cups do you want?");
-            cupPurchase = double.Parse(Console.ReadLine());
+            double cupsInCart = double.Parse(Console.ReadLine());
 
-
-            return cupPurchase;
+            cupCalc(player, cupsInCart, game);
+            return cupsInCart;
 
         }
 
-        public double lemonCalc()
+        public double lemonCalc(Player player, int lemonsInCart, Game game)
         {
 
-            if ((lemonPurchase * lemonPrice) <= player.money)
+            if ((lemonsInCart * lemonPrice) <= player.money)
             {
 
-                player.lemonCount += lemonPurchase;
-                player.money -= lemonPurchase * lemonPrice;
-                Console.WriteLine("You now have " + player.lemonCount + " lemons.");
+                player.lemonCount += lemonsInCart;
+                player.money -= lemonsInCart * lemonPrice;
+                Console.WriteLine("You now have " + player.lemonCount + " lemons and $" + player.money + ".");
+                Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
+                int returnChoice = int.Parse(Console.ReadLine());
 
-                return player.lemonCount;
+                if (returnChoice == 1)
+
+                {
+
+                    storeFront(player, game);
+
+                }
+
+                else
+
+                {
+
+                    game.mainMenu(player, game);
+
+                }
+
+                   return player.lemonCount;
             }
 
             else
             {
 
-                Console.WriteLine("You don't have enough money for this purchase");
+                Console.WriteLine("You don't have enough money for this purchase.");
+                storeFront(player, game);
                 return player.lemonCount;
             }
 
-       }
-       public double iceCalc()
-        {
+            
+            
 
-            if ((icePurchase * icePrice) <= player.money)
+        }
+        public double iceCalc(Player player, double iceInCart, Game game)
+        {
+            if ((iceInCart * icePrice) <= player.money)
             {
 
-                player.iceCount += icePurchase;
-                player.money -= icePurchase * icePrice;
-                Console.WriteLine("You now have " + player.iceCount + " cubes of ice.");
+                player.iceCount += iceInCart;
+                player.money -= iceInCart * icePrice;
+                Console.WriteLine("You now have " + player.iceCount + " servings of ice and $" + player.money + ".");
+                Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
+                int returnChoice = int.Parse(Console.ReadLine());
+
+                if (returnChoice == 1)
+
+                {
+
+                    storeFront(player, game);
+
+                }
+
+                else
+
+                {
+
+                    game.mainMenu(player, game);
+
+                }
 
                 return player.iceCount;
             }
@@ -105,41 +179,85 @@ namespace LemonAidStand
             else
             {
 
-                Console.WriteLine("You don't have enough money for this purchase");
+                Console.WriteLine("You don't have enough money for this purchase.");
+                storeFront(player, game);
                 return player.iceCount;
             }
 
-        }
-        public double sugarCalc()
-        {
 
-            if ((sugarPurchase * sugarPrice) <= player.money)
+
+
+        }
+
+        public double sugarCalc(Player player, double sugarInCart, Game game)
+        {
+            if ((sugarInCart * sugarPrice) <= player.money)
             {
 
-                player.sugarCount += sugarPurchase;
-                player.money -= sugarPurchase * sugarPrice;
-                Console.WriteLine("You now have " + player.sugarCount + " cups of sugar.");
-           
+                player.sugarCount += sugarInCart;
+                player.money -= sugarInCart * sugarPrice;
+                Console.WriteLine("You now have " + player.sugarCount + " servings of sugar and $" + player.money + ".");
+                Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
+                int returnChoice = int.Parse(Console.ReadLine());
+
+                if (returnChoice == 1)
+
+                {
+
+                    storeFront(player, game);
+
+                }
+
+                else
+
+                {
+
+                    game.mainMenu(player, game);
+
+                }
+
                 return player.sugarCount;
             }
 
             else
             {
 
-                Console.WriteLine("You don't have enough money for this purchase");
+                Console.WriteLine("You don't have enough money for this purchase.");
+                storeFront(player, game);
                 return player.sugarCount;
             }
 
+
+
+
         }
-        public double cupCalc()
+        public double cupCalc(Player player, double cupsInCart, Game game)
         {
 
-            if ((cupPurchase * cupPrice) <= player.money)
+            if ((cupsInCart * cupPrice) <= player.money)
             {
 
-                player.cupCount += cupPurchase;
-                player.money -= cupPurchase * cupPrice;
-                Console.WriteLine("You now have " + player.cupCount + " cups.");
+                player.cupCount += cupsInCart;
+                player.money -= cupsInCart * cupPrice;
+                Console.WriteLine("You now have " + player.cupCount + " cups and $" + player.money + ".");
+                Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
+                int returnChoice = int.Parse(Console.ReadLine());
+
+                if (returnChoice == 1)
+
+                {
+
+                    storeFront(player, game);
+
+                }
+
+                else
+
+                {
+
+                    game.mainMenu(player, game);
+
+                }
 
                 return player.cupCount;
             }
@@ -147,10 +265,14 @@ namespace LemonAidStand
             else
             {
 
-                Console.WriteLine("You don't have enough money for this purchase");
+                Console.WriteLine("You don't have enough money for this purchase.");
+                storeFront(player, game);
                 return player.cupCount;
             }
 
+
+
+
         }
     }
-    }
+}

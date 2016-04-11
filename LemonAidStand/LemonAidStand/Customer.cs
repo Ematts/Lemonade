@@ -8,13 +8,13 @@ namespace LemonAidStand
 {
     class Customer
     {
-        public int moodNumber;
+        public int thirstNumber;
         
         
 
-        public Customer(int MoodNumber)
+        public Customer(int ThirstNumber)
         {
-            moodNumber = MoodNumber;
+            thirstNumber = ThirstNumber;
         }
 
     }

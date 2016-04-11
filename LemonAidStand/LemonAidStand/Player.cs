@@ -14,6 +14,8 @@ namespace LemonAidStand
         public double iceCount = 0;
         public double cupCount = 0;
         public double glassPrice;
+      
+        
 
 
         public Player()
@@ -27,13 +29,18 @@ namespace LemonAidStand
 
             Console.WriteLine("How much do you want to charge for a glass?");
             glassPrice = double.Parse(Console.ReadLine());
-            
+
             return glassPrice;
 
-
         }
-    }
-}
+
+      
+        }
+
+
+ }
+
+
 
 
 

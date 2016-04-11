@@ -8,66 +8,72 @@ namespace LemonAidStand
 {
     class Game
     {
-        Player player = new Player();
-        Weather weather = new Weather();
-        Inventory ineventory = new Inventory();
+
         Store store = new Store();
-        int customerTotal = 50;
-        List<Customer> customerList = new List<Customer>();
-        List<Customer> buyerList = new List<Customer>();
-        double priceDemand;
-        Random rndCustomer = new Random();
-        Random rndMood = new Random();
-        double weatherDemand;
-        double totalDemand;
-        double buyerIndex;
+        Day day = new Day();
+        public int dayChoice; //should this be here?
 
-        public List<Customer> getCustomers()
+
+
+
+        public void startGame(Game game)
+        {
+            Player player = new Player();
+            startMenu();
+            mainMenu(player, game);
+        }
+        public int startMenu()
         {
 
-            for (int customerAmount = 0; customerAmount < customerTotal; customerAmount++)
+            Console.WriteLine("How many days do you want to play?");
+            dayChoice = int.Parse(Console.ReadLine());
+
+            return dayChoice;
+
+        }
+
+        public void mainMenu(Player player, Game game)
+        {
+            day.printDayNumber(game);
+            Console.WriteLine("Press 1 to go to the store to buy supplies, press 2 to check current money and supplies, press 3 to begin day.");
+            int menuChoice = int.Parse(Console.ReadLine());
+
+            if (menuChoice == 1)
             {
-                Customer customer = new Customer(rndMood.Next(0, 4));
-                customerList.Add(customer);
+                store.storeFront(player, game);
             }
-            return customerList;
 
-        }
-
-        public double getTotalDemand()
-
-        {
-
-            weatherDemand = weather.getWeatherDemand();
-            priceDemand = player.getGlassPrice();
-            totalDemand = weatherDemand / priceDemand;
-            return totalDemand;
-
-        }
-
-        public List<Customer> getBuyers()
-        {
-            foreach (Customer customer in customerList)
+            else if (menuChoice == 2)
             {
-                buyerIndex = customer.moodNumber * totalDemand;
+                Console.WriteLine("You currently have $" + player.money + ", " + player.lemonCount + " lemons, " + player.sugarCount + " servings of sugar, " + player.iceCount + " servings of ice, and " + player.cupCount + " cups.");
+                mainMenu(player, game);
+            }
 
-                if (buyerIndex >= 420)
+            else if (menuChoice == 3)
+            {
+                
+                day.weather.getWeatherDemand();
+                day.getTotalDemand(player);
+                day.getCustomers();
+                day.getBuyers(player);
+                day.executeDay(player);
+                day.cycleToNextDay(player, game);
+            }
 
-                {
-                    buyerList.Add(customer);
-                    
-                }
+            else
+            {
+
+                Console.WriteLine("That is not a valid option in this menu.");
+                mainMenu(player, game);
 
             }
-            return buyerList;
         }
+
+
+
 
     }
-}
-               
-
-
-            
+}            
 
 
            
@@ -75,4 +81,4 @@ namespace LemonAidStand
 
     
 
-
+   
