@@ -125,9 +125,9 @@ namespace LemonAidStand
 
         }
 
-        public void cycleToNextDay(Player player, Game game)
+      /*  public void cycleToNextDay(Player player, Game game)
         {
-            if(dayNumber <= game.dayChoice)
+            if (dayNumber <= game.dayChoice)
             {
                 game.mainMenu(player, game);
             }
@@ -135,17 +135,47 @@ namespace LemonAidStand
             else
             {
                 Console.WriteLine("Game over.  You ended with a total balance of $" + player.money + ".");
-                Console.WriteLine("Press 1 to play again, press any other number to exit program.");
-                int endChoice = int.Parse(Console.ReadLine());
+            }
+        }  */
+        public void getNewGame(Game game)
+            {
+            Console.WriteLine("Press 1 to play again, press 2 to exit.");
+            int endChoice = 0;
 
-                if (endChoice == 1)
-                {
-                    game = new Game();
-                    game.startGame(game);
+            try
+            {
 
-                }
+                endChoice = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getNewGame(game);
+
+            }
+
+            if (endChoice == 1)
+            {
+                game = new Game();
+                game.startGame(game);
+            }
+
+            else if (endChoice == 2)
+            {
+                Console.WriteLine("Goodby!");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+                
+
+            else
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getNewGame(game);
+
             }
         }
+   }
         
-    }
 }
+

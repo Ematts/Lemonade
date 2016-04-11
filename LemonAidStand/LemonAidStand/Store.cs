@@ -24,7 +24,18 @@ namespace LemonAidStand
             Console.WriteLine("Please place your supply order.");
             Console.WriteLine("You currently have $" + player.money + ", " + player.lemonCount + " lemons, " + player.sugarCount + " servings of sugar, " + player.iceCount + " servings of ice, and " + player.cupCount + " cups.");
             Console.WriteLine("Press 1 to buy lemons, 2 to buy sugar, 3 to buy ice, 4 to buy cups, or 5 to return to the main menu.");
-            int storeChoice = int.Parse(Console.ReadLine());
+            int storeChoice = 0;
+
+            try
+            {
+
+                storeChoice = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                storeFront(player, game);
+            }
 
             if (storeChoice == 1)
             {
@@ -68,7 +79,19 @@ namespace LemonAidStand
         {
 
             Console.WriteLine("Lemons cost .10 a piece.  How many lemons do you want?");
-            int lemonsInCart = int.Parse(Console.ReadLine());
+            int lemonsInCart = 0;
+            
+
+            try
+            {
+
+                lemonsInCart = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getLemons(player, game);
+            }
 
             lemonCalc(player, lemonsInCart, game);
             return lemonsInCart;
@@ -78,8 +101,19 @@ namespace LemonAidStand
         public double getIce(Player player, Game game)
         {
             Console.WriteLine("Ice costs .07 a serving.  How much ice do you want?");
-            double iceInCart = double.Parse(Console.ReadLine());
+            double iceInCart = 0;
 
+
+            try
+            {
+
+                iceInCart = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getIce(player, game);
+            }
             iceCalc(player, iceInCart, game);
             return iceInCart;
 
@@ -87,7 +121,18 @@ namespace LemonAidStand
         public double getSugar(Player player, Game game)
         {
             Console.WriteLine("Sugar costs .05 a serving.  How much sugar do you want?");
-            double sugarInCart = double.Parse(Console.ReadLine());
+            double sugarInCart = 0;
+
+            try
+            {
+
+                sugarInCart = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getSugar(player, game);
+            }
 
             sugarCalc(player, sugarInCart, game);
             return sugarInCart;
@@ -96,7 +141,18 @@ namespace LemonAidStand
         public double getCups(Player player, Game game)
         {
             Console.WriteLine("How many cups do you want?");
-            double cupsInCart = double.Parse(Console.ReadLine());
+            double cupsInCart = 0;
+
+            try
+            {
+
+                cupsInCart = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getCups(player, game);
+            }
 
             cupCalc(player, cupsInCart, game);
             return cupsInCart;
@@ -112,8 +168,20 @@ namespace LemonAidStand
                 player.lemonCount += lemonsInCart;
                 player.money -= lemonsInCart * lemonPrice;
                 Console.WriteLine("You now have " + player.lemonCount + " lemons and $" + player.money + ".");
-                Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
-                int returnChoice = int.Parse(Console.ReadLine());
+                Console.WriteLine("Press 1 to return to store menu or any other key to return to main menu.");
+               
+                int returnChoice = 0;
+
+                try
+                {
+
+                    returnChoice = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    
+                    game.mainMenu(player, game);
+                }
 
                 if (returnChoice == 1)
 
@@ -155,7 +223,18 @@ namespace LemonAidStand
                 player.money -= iceInCart * icePrice;
                 Console.WriteLine("You now have " + player.iceCount + " servings of ice and $" + player.money + ".");
                 Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
-                int returnChoice = int.Parse(Console.ReadLine());
+                int returnChoice = 0;
+
+                try
+                {
+
+                    returnChoice = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    
+                    game.mainMenu(player, game);
+                }
 
                 if (returnChoice == 1)
 
@@ -198,7 +277,18 @@ namespace LemonAidStand
                 player.money -= sugarInCart * sugarPrice;
                 Console.WriteLine("You now have " + player.sugarCount + " servings of sugar and $" + player.money + ".");
                 Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
-                int returnChoice = int.Parse(Console.ReadLine());
+                int returnChoice = 0;
+
+                try
+                {
+
+                    returnChoice = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+
+                    game.mainMenu(player, game);
+                }
 
                 if (returnChoice == 1)
 
@@ -241,7 +331,20 @@ namespace LemonAidStand
                 player.money -= cupsInCart * cupPrice;
                 Console.WriteLine("You now have " + player.cupCount + " cups and $" + player.money + ".");
                 Console.WriteLine("Press 1 to return to store menu or any other number to return to main menu.");
-                int returnChoice = int.Parse(Console.ReadLine());
+                int returnChoice = 0;
+
+                try
+                {
+
+                    returnChoice = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+
+                    game.mainMenu(player, game);
+                }
+
+
 
                 if (returnChoice == 1)
 

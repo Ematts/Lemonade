@@ -28,14 +28,24 @@ namespace LemonAidStand
         {
 
             Console.WriteLine("How much do you want to charge for a glass?");
-            glassPrice = double.Parse(Console.ReadLine());
+            //glassPrice = double.Parse(Console.ReadLine());
+            try
+            {
+                glassPrice = double.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That is not a valid option in this menu.");
+                getGlassPrice();
+
+            }
 
             return glassPrice;
 
-        }
+       }
 
       
-        }
+}
 
 
  }
